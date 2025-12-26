@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Carbon Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f6f9;
+      padding: 30px;
+    }
+    .container {
+      background: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    #out {
+      margin-top: 15px;
+      font-size: 16px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>My Carbon Tracker</h2>
+
+    <label>Car travel (km)</label>
+    <input id="car" type="number">
+
+    <label>Electricity used (kWh)</label>
+    <input id="elec" type="number">
+
+    <label>Plastic usage (kg)</label>
+    <input id="plastic" type="number">
+
+    <button onclick="go()">Calculate</button>
+    <button onclick="resetForm()">Reset</button>
+
+    <p id="out"></p>
+  </div>
+
+  <script>
+    function go() {
+      let car = document.getElementById("car").value || 0;
+      let elec = document.getElementById("elec").value || 0;
+      let plastic = document.getElementById("plastic").value || 0;
+
+      let total = car * 1 + elec * 2 + plastic * 0.5;
+
+      let message = "";
+      if (total < 20) {
+        message = "🌱 Good! Low emissions.";
+      } else if (total < 40) {
+        message = "⚠️ Average. Try reducing.";
+      } else {
+        message = "🔥 High emissions.";
+      }
+
+      document.getElementById("out").innerHTML =
+        "Your CO₂ score: " + total + "<br>" + message;
+    }
+
+    function resetForm() {
+      document.getElementById("car").value = "";
+      document.getElementById("elec").value = "";
+      document.getElementById("plastic").value = "";
+      document.getElementById("out").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
