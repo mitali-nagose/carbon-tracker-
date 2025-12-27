@@ -5,7 +5,29 @@
 
   <title>Carbon Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
+  <style>.result-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.medium {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.high {
+  background: #ffebee;
+  color: #c62828;
+}
+
     body {
       font-family: Arial, sans-serif;
       background: #f2f6f9;
@@ -72,7 +94,8 @@
     <button onclick="go()">Calculate</button>
     <button onclick="resetForm()">Reset</button>
 
-    <p id="out"></p>
+    <div id="out" class="result-box"></div>
+
   </div>
 
   <script>
@@ -92,8 +115,21 @@
         message = "🔥 High emissions.";
       }
 
-      document.getElementById("out").innerHTML =
-        "Your CO₂ score: " + total + "<br>" + message;
+    let box = document.getElementById("out");
+
+if (total < 20) {
+  box.className = "result-box low";
+} else if (total < 40) {
+  box.className = "result-box medium";
+} else {
+  box.className = "result-box high";
+}
+
+box.innerHTML = `
+  🌍 <b>Your CO₂ Score:</b> ${total.toFixed(2)} <br><br>
+  ${message}
+`;
+  
     }
 
     function resetForm() {
@@ -105,4 +141,5 @@
   </script>
 </body>
 </html>
+
 
